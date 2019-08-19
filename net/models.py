@@ -1,5 +1,5 @@
 import tensorflow as tf
-from tensorflow.python.keras.layers import Conv3D, Conv3DTranspose, LeakyReLU, BatchNormalization, Activation
+from tensorflow.python.keras.layers import Conv3D, Conv3DTranspose, Dense, LeakyReLU, BatchNormalization, Activation, Concatenate
 
 class Encoder_3DCNN():
     def __init__(self, dtype):
@@ -92,3 +92,31 @@ class Decoder_3DCNN():
         outputs = self.out(net)
 
         return tf.keras.Model(inputs=inputs, outputs=outputs)
+
+# class Decoder_IM():
+#     def __init__(self, dtype):
+#         super().__init__()
+#         self.fc1 = Dense(2048, dtype=dtype, name='fc1')
+#         self.lrelu1 = LeakyReLU(alpha=0.02, dtype=dtype, name='lrelu1')
+#         self.concate1 = Concatenate(name='concate1')
+
+#         self.fc2 = Dense(1024, dtype=dtype, name='fc2')
+#         self.lrelu2 = LeakyReLU(alpha=0.02, dtype=dtype, name='lrelu2')
+
+#         self.fc3 = Dense(512, name='fc3')
+#         self.lrelu3 = LeakyReLU(alpha=0.02, dtype=dtype, name='lrelu3')
+
+#         self.fc4 = Dense(256, name='fc4')
+#         self.lrelu4 = LeakyReLU(alpha=0.02, dtype=dtype, name='lrelu4')
+
+#         self.fc5 = Dense(128, name='fc5')
+#         self.lrelu5 = LeakyReLU(alpha=0.02, dtype=dtype, name='lrelu5')
+
+#         self.fc6 = Dense(1, dtype=dtype, name='fc5')
+
+#         self.out = Activation(activation=tf.keras.activations.sigmoid, name='sigmoid')
+
+#     def build(self, inputs):
+#         net = self,fc1(inputs)
+#         net = self.lrelu1(net)
+        
